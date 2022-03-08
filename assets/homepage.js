@@ -13,11 +13,13 @@ fetch(apiUrl).then(function(response) {
     });
 } else {
     alert("Page not found");
-};
+    }
+})
+.catch(function(error) {
+    alert("unable to connect to github");
+});
         displayRepos(data, user);
-    });
 };
-
 var userFormEl = document.querySelector("#user-form");
 var nameInputEl = document.querySelector("#username");
 
@@ -34,6 +36,10 @@ var formSubmitHandler = function(event) {
 };
 
 var displayRepos = function(repos, searchTerm) {
+if (repos.length === 0) {
+    repoContainerEl.textContent = "no repos found.";
+    return;
+}
     repoContainerEl.textContent = "";
     repoSearchTerm.textContent = searchTerm;
 for (var i = 0; i < repos.length; i++) {
